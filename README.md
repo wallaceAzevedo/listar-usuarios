@@ -1,2 +1,2 @@
 # listar usuarios
- lista de usuarios com javaScript e php
+ lista de usuarios com cadastro. com javaScript e php.
