@@ -20,7 +20,7 @@
 					Cadastrar
 				</button>
 			</p>
-			
+			<span id="msg"></span>
             <span id="conteudo"></span><br><br><br>
 		</div>
 		
@@ -53,7 +53,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-					<span id="msg-error"></span>
+						<span id="msg-error"></span>
 						<form method="post" id="insert_form">
 							<div class="form-group row">
 								<label class="col-sm-2 col-form-label">Nome</label>
@@ -116,32 +116,38 @@
 				
 				$('#insert_form').on('submit', function(event){
 					event.preventDefault();
-					if($('#nome')val() == ""){
-                       //Alerta de campo nome vazio
-							$("#msg-error").html('<div class="alert alert-danger" role="alert">necessário prencher o campo nome!</div>');
-					}else {
-					//Receber os dados do formulário
-					var dados = $("#insert_form").serialize();
-					$.post("cadastrar.php", dados, function (retorna){
-						if(retorna){
-							//Alerta de cadastro realizado com sucesso
-							$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>');
+					if($('#nome').val() == ""){
+						//Alerta de campo nome vazio
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher o campo nome!</div>');
+					}else if($('#email').val() == ""){
+						//Alerta de campo email vazio
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher o campo e-mail!</div>');						
+					}else{
+						//Receber os dados do formulário
+						var dados = $("#insert_form").serialize();
+						$.post("cadastrar.php", dados, function (retorna){
+							if(retorna){
+								//Alerta de cadastro realizado com sucesso
+								$("#msg").html('<div class="alert alert-success" role="alert">Usuário cadastrado com sucesso!</div>');
+								
+								//Limpar os campo
+								$('#insert_form')[0].reset();
+								
+								//Fechar a janela modal cadastrar
+								$('#addUsuarioModal').modal('hide');
+								
+								//Limpar mensagem de erro
+								$("#msg-error").html('');	
+								
+								listar_usuario(1, 50);
+							}else{
+								
+							}
 							
-							//Limpar os campo
-							$('#insert_form')[0].reset();
-							
-							//Fechar a janela modal cadastrar
-							$('#addUsuarioModal').modal('hide');
-
-							listar_usuario(1, 50);
-						}else{
-							
-						}
-						
-					});
-				}
+						});
+					}
+				});
 			});
-		});
 		</script>
     </body>
 </html>
