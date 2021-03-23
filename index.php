@@ -20,7 +20,7 @@
 					Cadastrar
 				</button>
 			</p>
-			<span id="msg"></span>
+			
             <span id="conteudo"></span><br><br><br>
 		</div>
 		
@@ -53,6 +53,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
+					<span id="msg-error"></span>
 						<form method="post" id="insert_form">
 							<div class="form-group row">
 								<label class="col-sm-2 col-form-label">Nome</label>
@@ -115,6 +116,10 @@
 				
 				$('#insert_form').on('submit', function(event){
 					event.preventDefault();
+					if($('#nome')val() == ""){
+                       //Alerta de campo nome vazio
+							$("#msg-error").html('<div class="alert alert-danger" role="alert">necessário prencher o campo nome!</div>');
+					}else {
 					//Receber os dados do formulário
 					var dados = $("#insert_form").serialize();
 					$.post("cadastrar.php", dados, function (retorna){
@@ -127,15 +132,16 @@
 							
 							//Fechar a janela modal cadastrar
 							$('#addUsuarioModal').modal('hide');
-							
+
 							listar_usuario(1, 50);
 						}else{
 							
 						}
 						
 					});
-				});
+				}
 			});
+		});
 		</script>
     </body>
 </html>
