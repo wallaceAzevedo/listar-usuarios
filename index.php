@@ -116,7 +116,7 @@
 				
 				$('#insert_form').on('submit', function(event){
 					event.preventDefault();
-					if($('#nome')val() == ""){
+					if($('#nome').val() == ""){
                        //Alerta de campo nome vazio
 							$("#msg-error").html('<div class="alert alert-danger" role="alert">necessário prencher o campo nome!</div>');
 					}else {
