@@ -119,6 +119,9 @@
 					if($('#nome').val() == ""){
                        //Alerta de campo nome vazio
 							$("#msg-error").html('<div class="alert alert-danger" role="alert">necessário prencher o campo nome!</div>');
+						}else if($('#email').val() == ""){
+						//Alerta de campo email vazio
+						$("#msg-error").html('<div class="alert alert-danger" role="alert">Necessário prencher o campo e-mail!</div>');	
 					}else {
 					//Receber os dados do formulário
 					var dados = $("#insert_form").serialize();
